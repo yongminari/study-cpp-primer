@@ -1,6 +1,7 @@
 #ifndef PERSON_H
 #define PERSON_H
 
+#include <ostream>
 #include <string>
 struct Person {
   std::string getName() const { return name; }
@@ -8,5 +9,7 @@ struct Person {
   std::string name;
   std::string addr;
 };
+
+std::ostream &print(std::ostream &, const Person &);
 
 #endif // PERSON_H
