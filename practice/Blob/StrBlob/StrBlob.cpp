@@ -1,4 +1,5 @@
 #include "StrBlob.h"
+#include "StrBlobPtr.h"
 #include <initializer_list>
 #include <memory>
 #include <stdexcept>
@@ -45,3 +46,6 @@ const string &StrBlob::back() const {
   check(0, "back on empty StrBlob");
   return data->back();
 }
+
+StrBlobPtr StrBlob::begin() { return StrBlobPtr(*this); }
+StrBlobPtr StrBlob::end() { return StrBlobPtr(*this, data->size()); }
