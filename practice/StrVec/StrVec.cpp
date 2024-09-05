@@ -1,9 +1,11 @@
 #include "StrVec.h"
+#include <initializer_list>
 #include <iterator>
 #include <memory>
 #include <string>
 #include <utility>
 
+using std::initializer_list;
 using std::make_move_iterator;
 using std::pair;
 using std::string;
@@ -62,6 +64,14 @@ StrVec &StrVec::operator=(StrVec &&rhs) noexcept {
     cap = rhs.cap;
     rhs.elements = rhs.first_free = rhs.cap = nullptr;
   }
+  return *this;
+}
+
+StrVec &StrVec::operator=(initializer_list<string> il) {
+  auto data = alloc_n_copy(il.begin(), il.end());
+  free();
+  elements = data.first;
+  first_free = cap = data.second;
   return *this;
 }
 

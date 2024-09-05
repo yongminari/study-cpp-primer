@@ -2,6 +2,7 @@
 #define STR_VEC_H
 
 #include <cstddef>
+#include <initializer_list>
 #include <memory>
 #include <string>
 #include <utility>
@@ -12,6 +13,7 @@ public:
   StrVec(StrVec &&s) noexcept;
   StrVec &operator=(const StrVec &);
   StrVec &operator=(StrVec &&) noexcept;
+  StrVec &operator=(std::initializer_list<std::string>);
   ~StrVec();
   void push_back(const std::string &);
   void push_back(std::string &&);
@@ -19,6 +21,8 @@ public:
   size_t capacity() const { return cap - elements; }
   std::string *begin() const { return elements; }
   std::string *end() const { return first_free; }
+  std::string &operator[](std::size_t n) { return elements[n]; }
+  const std::string &operator[](std::size_t n) const { return elements[n]; }
 
 private:
   static std::allocator<std::string> alloc;
